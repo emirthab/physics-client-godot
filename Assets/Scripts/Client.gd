@@ -1,6 +1,6 @@
 extends Node
 
-export var Url = "tcp://6.tcp.ngrok.io:10578"
+export var Url = "ws://25.67.67.142:3636"
 
 var ClientID : int
 var client = WebSocketClient.new()
