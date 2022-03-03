@@ -25,11 +25,22 @@ func receiveMovementData(key,value):
 
 func _physics_process(delta):
 	velocity = Vector2.ZERO
+	if has_node("PlayerNetworkSender"):
+		if Input.is_action_just_pressed('right') : receiveMovementData(0,0)
+		if Input.is_action_just_pressed('left'): receiveMovementData(1,0)
+		if Input.is_action_just_pressed('down'): receiveMovementData(2,0)
+		if Input.is_action_just_pressed('up'): receiveMovementData(3,0)
+		
+		if Input.is_action_just_released('right') : receiveMovementData(0,1)
+		if Input.is_action_just_released('left'): receiveMovementData(1,1)
+		if Input.is_action_just_released('down'): receiveMovementData(2,1)
+		if Input.is_action_just_released('up'): receiveMovementData(3,1)
+		
 	if is_pressing_right: velocity.x += 1
 	if is_pressing_left: velocity.x -= 1
 	if is_pressing_down: velocity.y += 1
 	if is_pressing_up: velocity.y -= 1
-	
+
 	velocity = velocity.normalized() * speed
 	velocity = move_and_slide(velocity)
 	

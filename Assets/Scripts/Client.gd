@@ -1,6 +1,6 @@
 extends Node
 
-export var Url = "tcp://2.tcp.ngrok.io:12608"
+export var Url = "tcp://6.tcp.ngrok.io:10578"
 
 var ClientID : int
 var client = WebSocketClient.new()
@@ -10,6 +10,7 @@ func _ready():
 	Client.createClient()
 	
 func createClient():
+	print("Connecting to game server...")
 	client.connect("connection_closed", self, "_closed")
 	client.connect("connection_error", self, "_closed")
 	client.connect("connection_established", self, "_connected")
@@ -30,7 +31,7 @@ func _connected(proto = ""):
 func _on_data():
 	var pkt = client.get_peer(1).get_packet().get_string_from_utf8()
 	pkt = str2var(pkt) as Array
-	print("Got data from server : ", pkt)
+	#print("Got data from server : ", pkt)
 	match pkt[0]:
 		0x05 : var err = get_tree().current_scene.get_node( "SpawnPoint/"+str(pkt[1]) ).receiveMovementData(pkt[2],pkt[3]) #movement interpolation
 		0x00 : createPlayerOnGame(pkt[1],true) #player master add and get their ClientID
@@ -38,7 +39,8 @@ func _on_data():
 		0x02 : createPlayerOnGame(pkt[1],false,Vector2( pkt[2],pkt[3] )) #when I connected, get other players data
 		0x03 : spawn.get_node(str(pkt[1])).queue_free() #disconnected
 		0x04 : playerPositionsInterpolation(pkt)
-			
+		0x06 : sendData([0x06]) #pong
+		
 func sendData(data):
 	data = var2str(data) as String
 	client.get_peer(1).put_packet(data.to_utf8())
@@ -54,6 +56,7 @@ func createPlayerOnGame(id, isMaster : bool, trans : Vector2 = Vector2(0,0)):
 	spawn.add_child(player)
 	
 func playerPositionsInterpolation(data : Array):
+	print(data)
 	data.remove(0)
 	for p in data:
 		var player = spawn.get_node(str(p[0]))
