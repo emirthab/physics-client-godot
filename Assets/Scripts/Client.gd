@@ -56,10 +56,11 @@ func createPlayerOnGame(id, isMaster : bool, trans : Vector2 = Vector2(0,0)):
 	spawn.add_child(player)
 	
 func playerPositionsInterpolation(data : Array):
+	print("debug = " + str(data))
 	var player = spawn.get_node(str(data[1]))
 	player.transform.origin.x = data[2]
 	player.transform.origin.y = data[3]
-		
+
 func _process(delta):
 	client.poll()
 	
