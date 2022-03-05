@@ -3,6 +3,8 @@ extends KinematicBody2D
 var speed = 200
 var velocity = Vector2.ZERO
 var LastVelocity = Vector2.ZERO
+var playerPositionsInterpolation = Vector2(0,0)
+var oldInterpolation = Vector2(0,0)
 
 onready var Player = $ViewportContainer/Viewport/CharacterModel
 onready var StateMachine = $AnimationTree.get("parameters/playback")
@@ -52,3 +54,6 @@ func _physics_process(delta):
 		
 	Player.rotation.y = lerp_angle(Player.rotation.y, atan2(-LastVelocity.x,-LastVelocity.y), delta * 10)
 	
+	if oldInterpolation != playerPositionsInterpolation:
+		transform.origin = playerPositionsInterpolation
+		oldInterpolation = playerPositionsInterpolation
