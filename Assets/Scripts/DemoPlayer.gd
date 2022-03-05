@@ -55,5 +55,6 @@ func _physics_process(delta):
 	Player.rotation.y = lerp_angle(Player.rotation.y, atan2(-LastVelocity.x,-LastVelocity.y), delta * 10)
 	
 	if oldInterpolation != playerPositionsInterpolation:
-		transform.origin = playerPositionsInterpolation
+		#transform.origin = playerPositionsInterpolation
+		transform.origin = transform.origin.linear_interpolate(playerPositionsInterpolation, delta * 10)
 		oldInterpolation = playerPositionsInterpolation
