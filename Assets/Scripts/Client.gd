@@ -38,7 +38,7 @@ func _on_data():
 		0x01 : createPlayerOnGame(pkt[1],false) #new player connected
 		0x02 : createPlayerOnGame(pkt[1],false,Vector2( pkt[2],pkt[3] )) #when I connected, get other players data
 		0x03 : spawn.get_node(str(pkt[1])).queue_free() #disconnected
-		0x04 : playerPositionsInterpolation(pkt)
+		0x04 : spawn.get_node(str(pkt[1])).playerPositionsInterpolation = Vector2(pkt[2],pkt[3])
 		0x06 : sendData([0x06]) #pong
 		
 func sendData(data):
@@ -54,12 +54,6 @@ func createPlayerOnGame(id, isMaster : bool, trans : Vector2 = Vector2(0,0)):
 	else:
 		player.transform.origin = trans
 	spawn.add_child(player)
-	
-func playerPositionsInterpolation(data : Array):
-	print("debug = " + str(data))
-	var player = spawn.get_node(str(data[1]))
-	player.transform.origin.x = data[2]
-	player.transform.origin.y = data[3]
 
 func _process(delta):
 	client.poll()
