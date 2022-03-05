@@ -1,40 +1,37 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/GameObjects/Player/DemoModel/Armature.gltf" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Scripts/DemoPlayer.gd" type="Script" id=2]
 
-[sub_resource type="Environment" id=12]
-
-[sub_resource type="World" id=13]
-environment = SubResource( 12 )
+[sub_resource type="World" id=15]
 
 [sub_resource type="CapsuleShape2D" id=8]
 radius = 27.0
 height = 40.0
 
-[sub_resource type="AnimationNodeAnimation" id=2]
-animation = "T-Pose-loop"
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Idle-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=3]
-animation = "Fast Run-loop"
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Running-loop"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=4]
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
 switch_mode = 1
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=7]
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
 switch_mode = 1
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachine" id=5]
-states/Idle/node = SubResource( 2 )
-states/Idle/position = Vector2( 373.25, 109.109 )
-states/Running/node = SubResource( 3 )
-states/Running/position = Vector2( 620.75, 109.187 )
-transitions = [ "Idle", "Running", SubResource( 4 ), "Running", "Idle", SubResource( 7 ) ]
+[sub_resource type="AnimationNodeStateMachine" id=13]
+states/Idle/node = SubResource( 9 )
+states/Idle/position = Vector2( 458.25, 58.25 )
+states/Running/node = SubResource( 10 )
+states/Running/position = Vector2( 765.75, 58.4062 )
+transitions = [ "Idle", "Running", SubResource( 11 ), "Running", "Idle", SubResource( 12 ) ]
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=11]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=14]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -54,7 +51,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1024, 1024 )
 own_world = true
-world = SubResource( 13 )
+world = SubResource( 15 )
 transparent_bg = true
 handle_input_locally = false
 msaa = 4
@@ -64,7 +61,7 @@ render_target_update_mode = 3
 transform = Transform( 0.999859, 0.0167893, 0, -0.0167893, 0.999859, 0, 0, 0, 1, 0.00118029, -0.0118027, 0 )
 
 [node name="Armature" parent="ViewportContainer/Viewport/CharacterModel" instance=ExtResource( 1 )]
-transform = Transform( 0.972187, 0.0347858, -0.231612, -0.0481002, 0.997484, -0.0520874, 0.229217, 0.0617792, 0.971413, 0.00446689, -0.0426765, -0.00551274 )
+transform = Transform( 0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="ViewportContainer/Viewport"]
 transform = Transform( -1, 2.66454e-15, -8.74228e-08, -1.42588e-08, 0.986609, 0.163102, 8.62521e-08, 0.163102, -0.986609, 0.0529976, 1.59634, -2.26869 )
@@ -73,7 +70,10 @@ transform = Transform( -1, 2.66454e-15, -8.74228e-08, -1.42588e-08, 0.986609, 0.
 shape = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 5 )
+tree_root = SubResource( 13 )
 anim_player = NodePath("../ViewportContainer/Viewport/CharacterModel/Armature/AnimationPlayer")
 active = true
-parameters/playback = SubResource( 11 )
+root_motion_track = NodePath("Armature/Skeleton:RootMotion")
+parameters/playback = SubResource( 14 )
+
+[editable path="ViewportContainer/Viewport/CharacterModel/Armature"]

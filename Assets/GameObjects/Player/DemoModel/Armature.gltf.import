@@ -11,12 +11,12 @@ dest_files=[ "res://.import/Armature.gltf-d79d44cc1ec56d73ab8e7d5cb1e89e39.scn" 
 
 [params]
 
-nodes/root_type="Node3D"
+nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
-nodes/use_legacy_names=true
+nodes/use_legacy_names=false
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
@@ -24,12 +24,12 @@ meshes/octahedral_compression=true
 meshes/compress=4286
 meshes/ensure_tangents=true
 meshes/storage=0
-meshes/light_baking=1
+meshes/light_baking=0
 meshes/lightmap_texel_size=0.1
 skins/use_named_skins=true
 external_files/store_in_subdir=false
 animation/import=true
-animation/fps=30
+animation/fps=15
 animation/filter_script=""
 animation/storage=false
 animation/keep_custom_tracks=false

@@ -1,6 +1,6 @@
 extends Node
 
-export var Url = "ws://25.67.67.142:3636"
+export var Url = "ws://45.141.149.120:3636"
 
 var ClientID : int
 var client = WebSocketClient.new()
@@ -56,12 +56,9 @@ func createPlayerOnGame(id, isMaster : bool, trans : Vector2 = Vector2(0,0)):
 	spawn.add_child(player)
 	
 func playerPositionsInterpolation(data : Array):
-	print(data)
-	data.remove(0)
-	for p in data:
-		var player = spawn.get_node(str(p[0]))
-		player.transform.origin.x = p[1]
-		player.transform.origin.y = p[2]
+	var player = spawn.get_node(str(data[1]))
+	player.transform.origin.x = data[2]
+	player.transform.origin.y = data[3]
 		
 func _process(delta):
 	client.poll()
