@@ -1,15 +1,16 @@
 extends Node
 
-export var Url = "ws://45.141.149.120:3636"
+export var Url = "ws://127.0.0.1:3636"
 
 var ClientID : int
 var client = WebSocketClient.new()
-onready var spawn = get_tree().current_scene.get_node("SpawnPoint")
+var spawn
+var displayName = ""
 
-func _ready():
-	Client.createClient()
+
+func createClient(dn):
+	displayName = dn
 	
-func createClient():
 	print("Connecting to game server...")
 	client.connect("connection_closed", self, "_closed")
 	client.connect("connection_error", self, "_closed")
@@ -25,8 +26,11 @@ func _closed(was_clean = false):
 	print("Closed, clean", was_clean)
 	set_process(false)
 
+
 func _connected(proto = ""):
 	print("Connected with protocol: ", proto)
+	spawn = get_tree().current_scene.get_node("SpawnPoint")
+	Client.sendData([0x07, displayName])
 
 func _on_data():
 	var pkt = client.get_peer(1).get_packet().get_string_from_utf8()
@@ -40,6 +44,8 @@ func _on_data():
 		0x03 : spawn.get_node(str(pkt[1])).queue_free() #disconnected
 		0x04 : spawn.get_node(str(pkt[1])).playerPositionsInterpolation = Vector2(pkt[2],pkt[3])
 		0x06 : sendData([0x06]) #pong
+		0x07 : spawn.get_node(str(pkt[1])).setDisplayLabel(pkt[2])
+		0x08 : fillNameLabels(pkt[1])
 		
 func sendData(data):
 	data = var2str(data) as String
@@ -54,6 +60,13 @@ func createPlayerOnGame(id, isMaster : bool, trans : Vector2 = Vector2(0,0)):
 	else:
 		player.transform.origin = trans
 	spawn.add_child(player)
+
+
+func fillNameLabels(players):
+	print(players)
+	for player in players:
+		spawn.get_node(str(player["id"])).setDisplayLabel(player["display_name"])
+
 
 func _process(delta):
 	client.poll()

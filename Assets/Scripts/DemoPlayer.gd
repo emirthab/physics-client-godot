@@ -9,6 +9,7 @@ var oldInterpolation = Vector2(0,0)
 onready var Player = $ViewportContainer/Viewport/CharacterModel
 onready var StateMachine = $AnimationTree.get("parameters/playback")
 
+
 var is_pressing_right = false
 var is_pressing_left = false
 var is_pressing_down = false
@@ -18,6 +19,10 @@ func _ready():
 	#$ViewportContainer/Viewport.set_use_own_world(true)
 	#$ViewportContainer/Viewport.world = World.new()
 	pass
+	
+func setDisplayLabel(displayName):
+	$Label.text = displayName
+	
 func receiveMovementData(key,value):
 	match key:
 		0 : is_pressing_right = false if value else true
