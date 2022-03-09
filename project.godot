@@ -16,7 +16,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Client="*res://Assets/Scripts/Client.gd"
+Client="*res://Assets/Scripts/Client.cs"
 
 [input]
 
