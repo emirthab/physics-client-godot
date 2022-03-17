@@ -1,13 +1,13 @@
 extends Node
 
-export var Url = "ws://127.0.0.1:3636"
+export var Url = "ws://45.141.149.120:3636"
+#export var Url = "ws://127.0.0.1:3636"
 
 var ClientID : int
 var client = WebSocketClient.new()
 var spawn
 var displayName = ""
-
-
+	
 func createClient(dn):
 	displayName = dn
 	
@@ -35,7 +35,7 @@ func _connected(proto = ""):
 func _on_data():
 	var pkt = client.get_peer(1).get_packet().get_string_from_utf8()
 	pkt = str2var(pkt) as Array
-	#print("Got data from server : ", pkt)
+	print("Got data from server : ", pkt)
 	match pkt[0]:
 		0x05 : var err = get_tree().current_scene.get_node( "SpawnPoint/"+str(pkt[1]) ).receiveMovementData(pkt[2],pkt[3]) #movement interpolation
 		0x00 : createPlayerOnGame(pkt[1],true) #player master add and get their ClientID
