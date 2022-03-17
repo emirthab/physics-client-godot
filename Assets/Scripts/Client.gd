@@ -57,6 +57,14 @@ func createPlayerOnGame(id, isMaster : bool, trans : Vector2 = Vector2(0,0)):
 	if isMaster:
 		ClientID = id
 		player.add_child(preload("res://Assets/GameObjects/Player/PlayerNetworkSender.tscn").instance())
+		var camera = Camera2D.new()
+		camera.current = true
+		# 2450 1425
+		camera.limit_left = 0
+		camera.limit_right = 2450
+		camera.limit_top = 0
+		camera.limit_bottom = 1425
+		player.add_child(camera)
 	else:
 		player.transform.origin = trans
 	spawn.add_child(player)
