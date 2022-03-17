@@ -16,7 +16,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Client="*res://Assets/Scripts/Client.cs"
+Client="*res://Assets/Scripts/Client.gd"
 
 [input]
 
@@ -45,10 +45,6 @@ down={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
-
-[network]
-
-limits/debugger_stdout/max_messages_per_frame=60
 
 [physics]
 
