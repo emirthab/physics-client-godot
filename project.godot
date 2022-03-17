@@ -46,6 +46,10 @@ down={
  ]
 }
 
+[network]
+
+limits/debugger_stdout/max_messages_per_frame=60
+
 [physics]
 
 common/enable_pause_aware_picking=true

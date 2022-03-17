@@ -19,8 +19,9 @@ public class Login : Control {
 		if ( nameInput.Text.Length < 3 )
 			return;
 		
-		GetNode<Client>("/root/Client").CreateClient(nameInput.Text);
-		GetTree().ChangeSceneTo(demoLevel3);
+		GetTree().ChangeSceneTo(demoLevel3);		
+		GetNode<Client>("/root/Client").CreateClient(nameInput.Text);	
+	
 	}
 
 
