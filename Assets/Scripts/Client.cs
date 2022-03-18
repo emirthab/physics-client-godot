@@ -9,7 +9,7 @@ public class Client : Node
 {
 	public WebSocketClient client = new WebSocketClient();
 	public int ClientID;
-	public string url = "ws://127.0.0.1:3636";
+	public string url = "ws://45.141.149.120:3636";
 	public Node2D spawn;
 	public string displayName = "";
 	PackedScene Player;
@@ -137,6 +137,14 @@ public class Client : Node
 		{
 			player.AddChild(playerNetworkSender);
 			ClientID = id;
+			Camera2D camera = new Camera2D();
+			camera.Current = true;
+			//2450 1425
+			camera.LimitLeft = 0;
+			camera.LimitRight = 2450;
+			camera.LimitTop = 0;
+			camera.LimitBottom = 1425;
+			player.AddChild(camera);
 		}
 		else
 		{

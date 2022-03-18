@@ -1,92 +1,55 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Sprites2D/DemoData/dressingroombg.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Sprites2D/DemoData/dressingroomcloset.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Sprites2D/DemoData/piano_window.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Textures/bg.jpeg" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 487, 61 )
+extents = Vector2( 1236, 14.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 18, 611 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 33, 64 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 43.125, 28.5 )
+extents = Vector2( 43, 36.5 )
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 35.0625, 76.25 )
+[node name="DemoLevel4" type="Node2D"]
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 20.366, 28.3235 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 53.2656, 80.125 )
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 94.75, 34 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 35, 121.5 )
-
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 35, 63.75 )
-
-[node name="DemoLevel" type="Node2D"]
-
-[node name="Level" type="Node2D" parent="."]
-
-[node name="Props" type="Node2D" parent="Level"]
-
-[node name="Dressingroombg" type="Sprite" parent="Level/Props"]
-position = Vector2( 511, 301 )
-scale = Vector2( 0.477016, 0.477016 )
+[node name="Bg" type="Sprite" parent="."]
+position = Vector2( 1201, 718 )
+scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 
-[node name="Dressingroomcloset" type="Sprite" parent="Level/Props"]
-position = Vector2( 348, 97 )
-scale = Vector2( 0.331325, 0.331325 )
-texture = ExtResource( 2 )
+[node name="Collisions" type="StaticBody2D" parent="."]
 
-[node name="PianoWindow" type="Sprite" parent="Level/Props"]
-position = Vector2( 516.869, 72.25 )
-scale = Vector2( 0.527542, 0.527542 )
-texture = ExtResource( 3 )
-
-[node name="Collisions" type="StaticBody2D" parent="Level"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Collisions"]
-position = Vector2( 511, 44 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 1237, 193.5 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Level/Collisions"]
-position = Vector2( 90.875, 132.5 )
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 1237, 1441 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 19, 818 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 2451, 815 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 133, 278 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 2369, 352.5 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Level/Collisions"]
-position = Vector2( 81.9375, 237.75 )
-shape = SubResource( 5 )
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="Level/Collisions"]
-position = Vector2( 165, 258 )
-rotation = 0.704933
-shape = SubResource( 6 )
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Level/Collisions"]
-position = Vector2( 98.7344, 394.875 )
-shape = SubResource( 7 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Level/Collisions"]
-position = Vector2( 512, 537 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="Level/Collisions"]
-position = Vector2( 533.25, 268 )
-shape = SubResource( 8 )
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="Level/Collisions"]
-position = Vector2( 936, 226.5 )
-shape = SubResource( 9 )
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="Level/Collisions"]
-position = Vector2( 952, 412 )
-shape = SubResource( 10 )
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Collisions"]
+position = Vector2( 735, 288 )
+shape = SubResource( 3 )
 
 [node name="SpawnPoint" type="Node2D" parent="."]
-position = Vector2( 314, 328 )
+position = Vector2( 418, 422 )

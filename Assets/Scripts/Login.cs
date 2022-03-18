@@ -4,7 +4,7 @@ using System;
 public class Login : Control {
 	LineEdit nameInput;
 	Button loginButton;
-	PackedScene demoLevel3 = GD.Load<PackedScene>("res://Assets/Levels/DemoLevel3.tscn");
+	PackedScene demoLevel3 = GD.Load<PackedScene>("res://Assets/Levels/DemoLevel.tscn");
 
 	public override void _Ready()
 	{
